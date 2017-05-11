@@ -58,9 +58,9 @@ $password = $_POST['password'];
 if ($email==null || $email=='' || $password==null || $password==''){
     //echo "email:" . $email;
     //echo "password:" .$password;
-    echo "please input email & password";
+    echo "<div align='center'>please input email & password</div>";
 }elseif ($_POST["code"]==null || $_SESSION["check_checks"]!=$_POST["code"]){
-    echo "please check your code";
+    echo "<div align='center'>please check your code</div>";
 }else {
     //check exsit
     $sql = sprintf("SELECT * FROM member WHERE email='%s' and password='%s'",$email,$password);

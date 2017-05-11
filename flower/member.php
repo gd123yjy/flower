@@ -4,7 +4,7 @@ require 'DAO.php';
 session_start();
 //retrieve session data
 if ($_SESSION['email']!=null){
-    echo "hello " . $_SESSION['email'];
+    header("Location: /flower/showflower.php");
 }else {
     header("Location: /flower/login.php");
 }
@@ -13,7 +13,7 @@ if ($_SESSION['email']!=null){
 <html>
 
 <body>
-<a href="/flower/showflower.php">exit</a>
+
 </body>
 
 </html>

@@ -1,42 +1,46 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yjy
- * Date: 17-4-27
- * Time: 下午10:36
- */
-include "top.php";
-require "DAO.php";
+include 'top.php';
+require 'DAO.php';
 ?>
-
-
+<html>
+<head></head>
+<body>
 <?php
-$sql = sprintf("SELECT * FROM flower.flower ");
-$res = DAO::getResultSet(DAO::getConnection(), $sql);
+$con = DAO::getConnection();
+$str = "select * from flower";
+$rs = mysqli_query($con, $str);
+$rownum = mysqli_num_rows($rs);
 
-foreach ($res as $rs) {
+for ($i = 0;$i < $rownum;$i ++):
+    $row = mysqli_fetch_assoc($rs);
+    ?>
 
-    try {
-        $name = sprintf("<div style='font-weight: bold; font-size: medium; height: 40px; line-height: 40px; color: #000066; text-align: center; border-width: 1px; border-style: solid; border-color: red;'> %s</div>", $rs['fname']);
+    <table style='width:700px;border-width:1px;border-style:dotted;' align=center>
+        <tr>
+            <td style='width: 30%'><?php echo "<img style='height:250px;width:200px;' src='picture/".$row['pictures']."'.'_b' />"; ?></td>
+            <td style='width: 70%'>
+                <div style='font-weight:bold;font-size:medium;height:40px;line-height:40px;color:#000066;text-align:center;border-width:1px;  border-style:solid;border-color:red;'> <?=$row['fname']?>
+                </div>
+                <div style='text-align: left;font-size:x-small;color: #000000;'>
+                    <table>
+                        <tr><td style="word-break: keep-all;">材料：</td><td><?php echo $row['cailiao']?></td></tr>
+                        <tr><td style="word-break: keep-all;">包装：</td><td><?php echo $row['baozhuang']?></td></tr>
+                        <tr><td style="word-break: keep-all;">花语：</td><td><?php echo $row['huayu']?></td></tr>
+                        <tr><td style="word-break: keep-all;">说明：</td><td><?php echo $row['shuoming']?></td></tr>
+                    </table>
+                </div>
+                <div style='text-align:left;font-size: medium; color: #000066;'>
+                    <div style='text-decoration:line-through;margin-top:8px;'>原价:￥<?php echo $row['price']?></div>
+                    现价：<font size=4 color=red><b>￥<?php echo $row['yourprice']?></b></font></div>
+                <div style='text-align: left;'>
+                    <a href="<?php echo "addgwch.php?flowerid=".$row['flowerID'] ;?>">
+                        <img alt="buy" src="image/ingwc_ico.jpg" />
+                    </a>
+                </div>
 
-        $picture = sprintf("<image src='flowerpicture/%s' width='150px'></image>", $rs['pictures']);
-
-        $detail = sprintf("%s<br><div style='text-align: left; font-size: medium; color: #000066;'>
-        <div style='text-decoration: line-through; margin-top: 8px;'>原价:￥ %s</div>
-        现价：<font size=4 color=red><b>￥ %s</b></font>
-    </div>", $rs['shuoming'], $rs['price'], $rs['yourprice']);
-
-        $cart = sprintf("<button type='button' style='width: 100px; height: 30px; background-image: url(image/box_title28.jpg)'>place to my cart</button>");
-
-        $table = sprintf("<table style='width: 700px; border-width: 1px; border-style: dotted;'
-       align=center><tr><td width='150px'></td><td colspan='3'>%s</td></tr><tr><td width='150px'>%s</td><td colspan='3'>%s</td></tr><tr><td width='150px'></td><td colspan='3'>%s</td></tr>", $name, $picture, $detail, $cart);
-
-        echo $table;
-    } catch (Exception $e) {
-        continue;
-    }
-
-}
-?>
-
-</table>
+            </td>
+        </tr>
+    </table>
+<?php endfor; ?>
+</body>
+</html>
