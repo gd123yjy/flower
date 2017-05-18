@@ -1,4 +1,4 @@
-<!-- //显示购物车功能 -->
+<!-- 显示购物车功能 -->
 <?php
 include 'top.php';
 require 'DAO.php';
@@ -20,7 +20,7 @@ $con = DAO::getConnection();
             <td>删除商品</td>
         </tr>
         <?php
-            $str = "select * from vcart";
+            $str = sprintf("select * from vcart WHERE email='%s'", $_SESSION['email']);
             $rs = mysqli_query($con, $str);
             $rownum = mysqli_num_rows($rs);
             $totalmoney = 0;
@@ -28,19 +28,19 @@ $con = DAO::getConnection();
             $row = mysqli_fetch_assoc($rs);
         ?>
             <tr>
-            
+
                 <td><?php echo $row['flowerID']; ?></td>
                 <td><?php echo "<img src='flowerpicture/".$row['pictures']."' />"; echo $row['fname']; ?></td>
                 <td><?php echo $row['price']; ?></td>
                 <td><?php echo $row['yourprice']; ?></td>
-                
+
                 <td>
-            
+
                     <input type="text" id="newNum<?php echo $i;?>" name="number" style="width: 30px "  value="<?php echo $row['num']; ?>">
                     <input type="text" id="flowerID<?php echo $i;?>" name="flowerid" value="<?php echo $row['flowerID']; ?>" style="display: none">
-                    
+
                     <button name="update" onclick="update(<?php echo $i;?>)">更新</button>
-                 
+
                 <script type="text/javascript">
                 var xmlHttp=false;
                 function createXMLHttpRequest()
@@ -56,7 +56,7 @@ $con = DAO::getConnection();
                                     }
                                 }
                         }
-                    
+
                     else if(window.XMLHttpRequest){
                         try{
                             xmlHttp = new XMLHttpRequest();
@@ -89,21 +89,21 @@ $con = DAO::getConnection();
                         window.location.href="mycart.php";
 
                     }
-                </script> 
+                </script>
                 </td>
-                
+
                 <td>
                     <a href="<?php echo "cart_delete.php?flowerid=".$row['flowerID']?>">
                         <button name="delete">删除</button>
                     </a>
-                </td>   
+                </td>
             </tr>
         <?php
-            $totalmoney = $totalmoney + $row['yourprice'] * $row['num']; 
-            endfor; 
+            $totalmoney = $totalmoney + $row['yourprice'] * $row['num'];
+            endfor;
         ?>
     </table>
-    
+
     <table style='width:900px;text-align:center' align=center>
         <tr>
             <td colspan="6">
@@ -113,20 +113,20 @@ $con = DAO::getConnection();
             </td>
         </tr>
     </table>
- 
+
     <table style='width:900px;text-align:center' align=center>
           <tr>
             <td colspan="6">
                 <div style="text-align: right">
                     <a href="showflower.php">
                         <img alt="buy" src="image/continue.jpg" />
-                    </a> 
+                    </a>
                     <a href="<?php echo "cart_clear.php" ;?>">
                         <img alt="buy" src="image/clearCart.jpg" />
                     </a>
-                    <a href="<?php echo "addgwch.php?flowerid=".$row['flowerID']?>">
+                    <a href="order.php">
                         <img alt="buy" src="image/submitOrder.jpg" />
-                    </a> 
+                    </a>
                 </div>
             </td>
         </tr>
