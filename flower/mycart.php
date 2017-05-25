@@ -3,6 +3,9 @@
 include 'top.php';
 require 'DAO.php';
 $con = DAO::getConnection();
+if ($_SESSION['email']==null){
+    header("Location: /flower/login.php");
+}
 ?>
 
 <html>

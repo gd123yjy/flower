@@ -14,7 +14,7 @@ CREATE TABLE customer(
 delete from customer;
 
 insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('b@163.com','李筱雯','女','18012889889','佛山市南海区狮山大学城','528225','0');
-insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('b@163.com','方凯西','男','18022735825','佛山市南海区狮山大学城','528225','0');
+insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('b@163.com','方凯西','男','18022735825','佛山市南海区狮山大学城','528225','1');
 insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('a@163.com','陈小花','女','18912123212','佛山市南海区狮山大学城','528225','0');
 insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('a@163.com','王红霞','女','13522132124','广州市新港东路144号','510009','1');
 insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('a@163.com','李梅','女','18921214244','广州市华南师范大学','510023','0');
@@ -29,6 +29,17 @@ insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('aa@163
 insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('aa@163.com','方定威','男','18923234343','佛山南海狮山大学城','528225','1');
 
 select * from customer;
+
+CREATE TABLE customer1(
+	custID  int not null,
+	email char(30),
+	sname char(10),
+	sex char(2),
+	mobile char(11),
+	address char(200),
+	zip char(6),
+       PRIMARY KEY(custID)
+);
 
 CREATE TABLE flower(
 	flowerID char(15),
@@ -95,6 +106,7 @@ CREATE TABLE flower(
 	fpsname varchar(8),
 	ddzt varchar(20),
 	cltime datetime,
+	kddh  char(50),
 	beizhu varchar(100)
 	)ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -111,11 +123,12 @@ CREATE TABLE flower(
 	SLID int  PRIMARY KEY   auto_increment,
 	orderID int,
 	flowerID char(30),
+	email char(30),
 	num int,
 	title varchar(50),
 	star smallint,
 	evaluate varchar(300)
-	)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+	)DEFAULT CHARSET=utf8;
 
 	CREATE TABLE admin(
 		username varchar(30)  PRIMARY KEY,

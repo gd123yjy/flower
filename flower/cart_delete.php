@@ -1,4 +1,4 @@
-<!-- //删除功能 -->
+<!-- 删除功能 -->
 <?php
 require 'DAO.php';
 $con = DAO::getConnection();

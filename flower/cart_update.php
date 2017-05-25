@@ -1,4 +1,4 @@
-<!-- //数量修改功能 -->
+<!-- 数量修改功能 -->
 <?php
 require 'DAO.php';
 $con = DAO::getConnection();

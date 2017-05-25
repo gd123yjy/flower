@@ -1,4 +1,4 @@
-<!-- //清楚购物车功能 -->
+<!-- 清除购物车功能 -->
 <?php
 require 'DAO.php';
 $con = DAO::getConnection();
