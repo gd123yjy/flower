@@ -255,16 +255,16 @@ if ($_POST['handup']!=null){
     $receiver = $_POST['receiver'];
 
     //开始事务
-    mysqli_query($con, "BEGIN");
+    $con->autocommit(false);
     $info = true;
     //step1 添加订单信息到myorder表
     $sql = sprintf("insert into myorder(email,custID,inputtime,peisongday,peisongtime,peisong,psyq,liuyan,shuming,fkfs,fp,fpaddress,zip,fpsname) 
             values('%s',%d,'%s','%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s')",
             $email,$custID,$inputtime,$peisongday,$peisongtime,$peisong,$psyq,$liuyan,$shuming,$fkfs,$fpsname,$fpaddress,$zip,$receiver);
-    $info &= mysqli_query($con, $sql);
+    $info &= $con->query($sql);
 
     $str = sprintf("select * from vcart WHERE email='%s'", $email);
-    $rs = mysqli_query($con, $str);
+    $rs = $con->query($str);
     $rownum = mysqli_num_rows($rs);
     for ($i = 0;$i < $rownum;$i ++){
         $row = mysqli_fetch_assoc($rs);
@@ -273,24 +273,24 @@ if ($_POST['handup']!=null){
         //step2 将购买的商品列表添加到shoplist表中
         $sql = sprintf("insert into shoplist(orderID,flowerID,email,num,title,star,evaluate) 
             SELECT max(orderID),'%s','%s',%d ,'%s',%d ,'%s' from myorder", $flowerID,$email,$num,"",0,"");
-        $info &= mysqli_query($con, $sql);
+        $info &= $con->query( $sql);
         //step3 修改flower表中的selledNum字段。修改鲜花的销售数量
-        $sql = sprintf("update flower set SelledNum=(SELECT SelledNum+%d FROM flower) WHERE flowerID='%s'",$num,$flowerID);
-        $info &= mysqli_query($con, $sql);
+        $sql = sprintf("update flower set SelledNum=(SELECT SelledNum+%d ) WHERE flowerID='%s'",$num,$flowerID);
+        $info &= $con->query( $sql);
         //step4 删除购物车表中已购买的商品
         $sql = sprintf("delete from cart where email='%s' AND flowerID='%s'",$email,$flowerID);
-        $info &= mysqli_query($con, $sql);
+        $info &= $con->query( $sql);
     }
 
     if($info){
-        mysqli_query($con, "COMMIT");
+        $con->commit();
         echo "<script>alert('提交成功！');window.location.href='index.php'</script>";
     }
     else{
-        mysqli_query($con, "ROLLBACK");
+        $con->rollback();
         echo "<script>alert('提交失败！');window.location.href='mycart.php'</script>";
     }
-    mysqli_query($con, "END");
+    $con->autocommit(true);
     //结束事务
 
 }

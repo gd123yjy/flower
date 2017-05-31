@@ -1,3 +1,4 @@
 <?php
-include "top.php";
+include "showflower.php";
+//phpinfo();
 ?>

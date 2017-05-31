@@ -5,7 +5,7 @@ session_start();
 <center>
 	<table width=999px border=0>
 		<tr>
-			<td rowspan=2><img src="image\\logo.jpg"
+			<td rowspan=2><img src="image\logo.jpg"
 				style="width: 216px; height: 68px"></td>
 			<td style="font-size: x-small;">
                 <?php
@@ -26,7 +26,7 @@ session_start();
 				style="font-size: x-small; text-decoration: none;">注册</a>&nbsp;&nbsp;
 				<a href="adminlogin.php"
 				style="font-size: x-small; text-decoration: none;">后台登录</a>&nbsp;&nbsp;</td>
-			<td style="text-align: right;"><img src="image\\ttel.jpg"></td>
+			<td style="text-align: right;"><img src="image\ttel.jpg"></td>
 		</tr>
 		<tr>
 			<td colspan=3
