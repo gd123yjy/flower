@@ -2,19 +2,38 @@
 include 'top.php';
 require 'DAO.php';
 ?>
+
 <html>
 <head></head>
 <body>
+
 <?php
 $con = DAO::getConnection();
-$str = "select * from flower";
+
+//分页
+$str = "select count(*) totalNum from flower";
 $rs = mysqli_query($con, $str);
-$rownum = mysqli_num_rows($rs);
+$totalNum = mysqli_fetch_assoc($rs)['totalNum'];
+$pageSize = 5;
+?>
 
-for ($i = 0;$i < $rownum;$i ++):
+<div align="center">
+<?php
+//顶端超链接
+for ($i=0;$i<$totalNum/$pageSize+1;$i++):
+?>
+<a href="?pageNum=<?php echo $i?>"><?php echo $i+1?></a>&nbsp;&nbsp;
+<?php endfor; ?>
+</div>
+
+<?php
+$start = ($_GET['pageNum'])*$pageSize;
+$end = $start+$pageSize;
+for ($i = $start;$i < $end;$i ++):
+    $str = "select * from flower ORDER BY flowerID limit $start,$pageSize";
+    $rs = mysqli_query($con, $str);
     $row = mysqli_fetch_assoc($rs);
-    ?>
-
+?>
     <table style='width:700px;border-width:1px;border-style:dotted;' align=center>
         <tr>
             <td style='width: 30%'><?php echo "<img style='height:250px;width:200px;' src='picture/".$row['pictures']."'.'_b' />"; ?></td>
@@ -37,10 +56,10 @@ for ($i = 0;$i < $rownum;$i ++):
                         <img alt="buy" src="image/ingwc_ico.jpg" />
                     </a>
                 </div>
-
             </td>
         </tr>
     </table>
 <?php endfor; ?>
+
 </body>
 </html>

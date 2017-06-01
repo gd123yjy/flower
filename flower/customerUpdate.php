@@ -2,8 +2,7 @@
 include 'conn/conn.php';
 
 $custID = $_GET['custID'];
-// $con->autocommit(false);
-// $flag=true;
+$con->autocommit(false);
 
 $str = "select * from customer where cdefault=1";
 $rs = mysqli_query($con, $str);
@@ -21,7 +20,7 @@ if (mysqli_fetch_row($rs1)){
     else
         echo "<script>alert('更改失败！');window.location.href='order.php'</script>";
 }
-// $con->autocommit(true);
+$con->autocommit(true);
 
 
 ?>
