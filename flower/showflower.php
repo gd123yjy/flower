@@ -27,7 +27,10 @@ for ($i=0;$i<$totalNum/$pageSize+1;$i++):
 </div>
 
 <?php
-$start = ($_GET['pageNum'])*$pageSize;
+if (($pageNum=$_GET['pageNum'])==null){
+    $pageNum = 0;
+}
+$start = ($pageNum)*$pageSize;
 $end = $start+$pageSize;
 for ($i = $start;$i < $end;$i ++):
     $str = "select * from flower ORDER BY flowerID limit $start,$pageSize";

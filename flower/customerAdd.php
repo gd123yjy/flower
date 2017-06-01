@@ -47,8 +47,9 @@ include 'top.php';
 </body>
 </html>
 <?php
-include 'conn/conn.php'; 
-session_start();
+include 'DAO.php';
+//session_start();
+$con = DAO::getConnection();
 
 $email = $_SESSION['email'];
 $sname = $_POST['name'];

@@ -50,8 +50,6 @@
 <?php
 require 'DAO.php';
 
-//session_start();
-
 $email = $_POST['email'] ."@". $_POST['mailbox'];
 $password = $_POST['password'];
 
@@ -69,7 +67,7 @@ if ($email==null || $email=='' || $password==null || $password==''){
         // store session data
         $_SESSION['email']=$email;
         $_SESSION['password']=$password;
-        header("Location: /flower/member.php");
+        header("Location: /flower/showflower.php");
     }else{
         echo "<script>alert('用户密码不匹配！');window.location.href='login.php'</script>";
     }

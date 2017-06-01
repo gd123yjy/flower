@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'utilty.php';
 ?>
 <meta charset="utf-8">
 <center>
@@ -20,8 +21,17 @@ session_start();
 			</td>
 		</tr>
 		<tr>
-			<td><a href="login.php"
-				style="font-size: x-small; text-decoration: none;">登录</a>&nbsp;&nbsp;
+			<td>
+				<?php
+				if (isLogin()){
+					echo "<a href=\"logout.php\"
+				style=\"font-size: x-small; text-decoration: none;\">退出</a>";
+				} else {
+					echo "<a href=\"login.php\"
+				style=\"font-size: x-small; text-decoration: none;\">登录</a>";
+				}
+				?>
+				&nbsp;&nbsp;
 				<a href="register.php"
 				style="font-size: x-small; text-decoration: none;">注册</a>&nbsp;&nbsp;
 				<a href="adminlogin.php"
