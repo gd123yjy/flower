@@ -1,5 +1,7 @@
 <?php
-include 'conn/conn.php';
+include 'DAO.php';
+
+$con = DAO::getConnection();
 
 $custID = $_GET['custID'];
 $con->autocommit(false);

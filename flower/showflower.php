@@ -20,7 +20,7 @@ $pageSize = 5;
 <div align="center">
 <?php
 //顶端超链接
-for ($i=0;$i<$totalNum/$pageSize+1;$i++):
+for ($i=0;$i<$totalNum/$pageSize;$i++):
 ?>
 <a href="?pageNum=<?php echo $i?>"><?php echo $i+1?></a>&nbsp;&nbsp;
 <?php endfor; ?>
@@ -32,9 +32,12 @@ if (($pageNum=$_GET['pageNum'])==null){
 }
 $start = ($pageNum)*$pageSize;
 $end = $start+$pageSize;
-for ($i = $start;$i < $end;$i ++):
-    $str = "select * from flower ORDER BY flowerID limit $start,$pageSize";
-    $rs = mysqli_query($con, $str);
+
+$str = "select * from flower limit $start,$pageSize";
+$rs = mysqli_query($con, $str);
+
+$rownum = mysqli_num_rows($rs);
+for ($i = 0;$i < $rownum;$i ++):
     $row = mysqli_fetch_assoc($rs);
 ?>
     <table style='width:700px;border-width:1px;border-style:dotted;' align=center>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'utilty.php';
+include_once 'utilty.php';
 ?>
 <meta charset="utf-8">
 <center>
