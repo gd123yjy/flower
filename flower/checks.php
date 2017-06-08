@@ -1,6 +1,6 @@
 <?php
-
 session_start();
+
 header("content-type:image/png");  	  //设置创建图像的格式
 $image_width=70;                      //设置图像宽度
 $image_height=18;                     //设置图像高度

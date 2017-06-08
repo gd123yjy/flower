@@ -1,6 +1,7 @@
 <?php
-include 'conn/conn.php';
-session_start();
+include 'DAO.php';
+$con = DAO::getConnection();
+
 $custID = $_GET['custID'];
 
 $sql = "delete from customer where custID='".$custID."'";

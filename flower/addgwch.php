@@ -3,7 +3,7 @@
 require 'DAO.php';
 $con = DAO::getConnection();
 
-session_start();
+    session_start();
     $email = $_SESSION['email'];
     if ($email==null){
         header("Location: /flower/login.php");

@@ -251,16 +251,18 @@ if ($_POST['handup']!=null){
     }
     $fpaddress = $_POST['address'];
     $zip = $_POST['zip'];
-    $fpsname = $_POST['invoiceTitle'];
-    $receiver = $_POST['receiver'];
+    $fp = $_POST['invoiceTitle'];
+    $fpsname = $_POST['receiver'];
 
     //开始事务
     $con->autocommit(false);
     $info = true;
     //step1 添加订单信息到myorder表
-    $sql = sprintf("insert into myorder(email,custID,inputtime,peisongday,peisongtime,peisong,psyq,liuyan,shuming,fkfs,fp,fpaddress,zip,fpsname) 
-            values('%s',%d,'%s','%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s')",
-            $email,$custID,$inputtime,$peisongday,$peisongtime,$peisong,$psyq,$liuyan,$shuming,$fkfs,$fpsname,$fpaddress,$zip,$receiver);
+    include_once "utilty.php";
+
+    $sql = sprintf("insert into myorder(email,custID,shifu,inputtime,peisongday,peisongtime,peisong,psyq,liuyan,shuming,fkfs,fp,fpaddress,zip,fpsname,ddzt) 
+            values('%s',%d,%d,'%s','%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s','s')",
+            $email,$custID,$_SESSION['totalmoney'],$inputtime,$peisongday,$peisongtime,$peisong,$psyq,$liuyan,$shuming,$fkfs,$fp,$fpaddress,$zip,$fpsname,"代付款");
     $info &= $con->query($sql);
 
     $str = sprintf("select * from vcart WHERE email='%s'", $email);
@@ -284,7 +286,7 @@ if ($_POST['handup']!=null){
 
     if($info){
         $con->commit();
-        echo "<script>alert('提交成功！');window.location.href='index.php'</script>";
+        echo "<script>alert('提交成功！');window.location.href='showorder.php'</script>";
     }
     else{
         $con->rollback();

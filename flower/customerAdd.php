@@ -48,7 +48,7 @@ include 'top.php';
 </html>
 <?php
 include 'DAO.php';
-//session_start();
+
 $con = DAO::getConnection();
 
 $email = $_SESSION['email'];

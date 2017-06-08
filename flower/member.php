@@ -6,7 +6,9 @@ include 'loginRedirector.php';
 <html>
 
 <body>
-this is member.php
+
+<?php include "memberleft.html"//TODO?>
+
 </body>
 
 </html>

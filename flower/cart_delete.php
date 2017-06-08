@@ -3,7 +3,7 @@
 require 'DAO.php';
 $con = DAO::getConnection();
 
-session_start();
+
     $flowerID = $_GET['flowerid'];
     $sql = sprintf("delete from cart where email='%s' AND flowerID='%s'",$_SESSION['email'],$flowerID);
     $info = mysqli_query($con, $sql);

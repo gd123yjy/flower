@@ -47,6 +47,7 @@ $con = DAO::getConnection();
                 <?php
                 $str_shoplist = "select * from showshoplist where orderID = '$orderID'";
                 $result_shoplist = mysqli_query($con, $str_shoplist);
+                $rownum = mysqli_num_rows($result_shoplist);
                 while ($rs2 = mysqli_fetch_array($result_shoplist)) {
                     ?>
 
@@ -55,35 +56,36 @@ $con = DAO::getConnection();
                     <td style="width: 300px;height: 150px;">
                         <?php
 
-                        if ($rs2[pictures]) {
+                        if ($rs2['pictures']) {
                             ?>
                             <img src="<?php echo " 'picture/$rs2[pictures]' " ?>">
                         <?php }
-                        echo $rs2[fname];
+                        echo $rs2['fname'];
                         ?>
                     </td>
 
                     <!-- 单价，划掉原价显示现价-->
                     <td>
-                        <div style='text-decoration:line-through'><?php echo $rs2[price]; ?></div>
-                        <div style="color: blue"><?php echo $rs2[yourprice]; ?></div>
+                        <div style='text-decoration:line-through'><?php echo $rs2['price']; ?></div>
+                        <div style="color: blue"><?php echo $rs2['yourprice']; ?></div>
                     </td>
 
                     <!-- 数量-->
                     <td><?php
-                    echo $rs2[num];
+                    echo $rs2['num'];
                     //订单的总价
-                    $sum += $rs2[yourprice] * $rs2[num];
+                    $sum += $rs2['yourprice'] * $rs2['num'];
                 }?>
                 </td>
 
-                <td><?php echo $sum; ?></td>
+                <!-- 实付款 -->
+                <td align="central"><?php echo $sum; ?></td>
 
                 <!-- 交易状态-->
-                <td><?php echo $rs1[ddzt];?></td>
+                <td><?php echo $rs1['ddzt'];?></td>
 
                 <td><a href="orderDetail.php?orderID=<?php echo $orderID;?>">查看</a>
-                    <a href="">取消</a>
+                    <a href="orderWithdraw.php?orderID=<?php echo $orderID;?>">取消</a>
                     <a href="">付款</a></td>
                 </tr>
 

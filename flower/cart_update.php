@@ -3,8 +3,8 @@
 require 'DAO.php';
 $con = DAO::getConnection();
 
-session_start();
 
+    session_start();
     $flowerID = $_GET['flowerid'];
     $newnum = $_GET['number'];
     

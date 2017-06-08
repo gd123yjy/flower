@@ -3,7 +3,7 @@
 require 'DAO.php';
 $con = DAO::getConnection();
 
-session_start();
+
 
 $sql = sprintf("delete from cart where email='%s' ",$_SESSION['email']);
 $info = mysqli_query($con, $sql);

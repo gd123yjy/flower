@@ -30,7 +30,7 @@ $sum = 0;
         ?>
         <tr><td style="text-align: center;background-color: lightgrey;border-radius:5px"><b style="font-size: 20px">订单处理信息</b></td></tr>
         <tr><td>订单编号：<div style="color: red"><?php echo $orderID;?></div></td></tr>
-        <tr><td>订单状态：<div style="color: red"><?php echo $rs[ddzt];?></div>&nbsp;<a href="">取消</a>&nbsp;&nbsp;<a href="">付款</a></td></tr>
+        <tr><td>订单状态：<div style="color: red"><?php echo $rs[ddzt];?></div>&nbsp;<a href="orderWithdraw.php?orderID=<?php echo $orderID;?>">取消</a>&nbsp;&nbsp;<a href="">付款</a></td></tr>
 
         <tr><td style="text-align: center;background-color: lightgrey;border-radius:5px"><b style="font-size: 20px">订单基本信息</b></td></tr>
         <tr><td><b style="color: red">订货人信息</b></td></tr>
@@ -85,7 +85,11 @@ $sum = 0;
             </td>
         </tr>
 
-        <tr><td><p style="float: right">订单合计金额：<?php echo $sum;?></p></td></tr>
+        <tr>
+            <td><p style="float: right">订单合计金额：<?php echo $sum;?></p></td>
+        </tr>
+
+        <tr><td><a href="showorder.php" style="float: right">返回</a></td></tr>
 
     </table>
 </form>
