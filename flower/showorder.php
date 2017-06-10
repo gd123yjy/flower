@@ -94,7 +94,7 @@ $con = DAO::getConnection();
                 } else if ($rs1['ddzt'] == "待发货") {
                     $html = sprintf("<td rowspan='%d'>待发货</td><td rowspan='%d'><a href='orderDetail.php?orderID=%d'>查看</a>&nbsp;<a href='orderWithdraw.php?orderID=%d'>取消</a></td>", $rownum, $rownum, $orderID, $orderID);
                 } else if ($rs1['ddzt'] == "已发货") {
-                    $html = sprintf("<td rowspan='%d'>已发货&nbsp;<a href='confirmOrder.php?orderID=%d'>确认收货</a></td><td rowspan='%d'><a href='orderDetail.php?orderID=%d'>查看</a>&nbsp;<a href='refund.php?orderID=%d'>退货</a></td>", $rownum, $orderID, $rownum, $orderID, $orderID);
+                    $html = sprintf("<td rowspan='%d'>已发货&nbsp;<a href='orderUpdate.php?orderID=%d'>确认收货</a></td><td rowspan='%d'><a href='orderDetail.php?orderID=%d'>查看</a>&nbsp;<a href='refund.php?orderID=%d'>退货</a></td>", $rownum, $orderID, $rownum, $orderID, $orderID);
                 } else if ($rs1['ddzt'] == "已完成") {
                     $html = sprintf("<td rowspan='%d'>已完成</td><td rowspan='%d'><a href='orderDetail.php?orderID=%d'>查看</a>&nbsp;<a href='pingjia.php?orderID=%d'>评价</a></td>", $rownum, $rownum, $orderID, $orderID);
                 } else {
