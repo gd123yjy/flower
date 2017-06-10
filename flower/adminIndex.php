@@ -49,7 +49,8 @@ include_once 'utilty.php';
                 </a>&nbsp; &nbsp; &nbsp;
 
                 <span style="color: White;"> |</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="showflower.php" style="text-decoration: none;">
+                <!-- TODO -->
+                <a href="adminPingjia.php" style="text-decoration: none;">
                     <span style="color: White; font-weight: bold; font-size: medium; font-family: 宋体">评价管理</span>
                 </a>&nbsp; &nbsp; &nbsp;
 

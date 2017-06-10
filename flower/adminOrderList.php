@@ -38,11 +38,9 @@ function parseInt2DDZT($ddzt_i)
 <html>
 <head>
     <script>
-        function updateDdzt(
-        var orderID
-        )
+        function updateDdzt(orderID)
         {
-            var obj = document.getElementByIdx_x("ddztSelection"+orderID); //定位id
+            var obj = document.getElementById("ddztSelection"+orderID); //定位id
 
             var index = obj.selectedIndex; // 选中索引
 
@@ -50,21 +48,21 @@ function parseInt2DDZT($ddzt_i)
 
             var value_m = obj.options[index].value; // 选中值
 
-            window.location.href="adminUpdateDdzt.php?orderID="+orderID+"$ddzt_new="+value_m;
+            window.location.href="adminUpdateDdzt.php?orderID="+orderID+"&ddzt_new="+value_m;
         }
     </script>
 </head>
 <body>
-<table>
+<table align="center" cellspacing="1" cellpadding="1">
     <thead>
     <tr>
-        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 30px;width: 90px">序号</td>
-        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 30px;width: 90px">订单编号</td>
-        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 30px;width: 90px">订货人</td>
-        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 30px;width: 90px">收货人</td>
-        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 30px;width: 90px">下单时间</td>
-        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 30px;width: 90px">实付</td>
-        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 30px;width: 90px">订单状态</td>
+        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 45px;width: 90px">序号</td>
+        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 45px;width: 90px">订单编号</td>
+        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 45px;width: 90px">订货人</td>
+        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 45px;width: 90px">收货人</td>
+        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 45px;width: 90px">下单时间</td>
+        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 45px;width: 90px">实付</td>
+        <td colspan="6" style="background-color: #ffffa5;border-radius:2px;height: 45px;width: 90px">订单状态</td>
     </tr>
     </thead>
 
@@ -88,33 +86,32 @@ function parseInt2DDZT($ddzt_i)
             $ddzt = $rs1['ddzt'];
             ?>
             <tr>
-                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 50px;width: 90px">
+                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 100px;width: 90px">
                     <?php echo $i; ?>
                 </td>
-                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 50px;width: 150px">
+                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 100px;width: 150px">
                     <?php echo $orderID; ?>
                 </td>
-                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 50px;width: 150px">
+                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 100px;width: 150px">
                     <?php echo $email; ?>
                 </td>
-                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 50px;width: 150px">
+                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 100px;width: 150px">
                     <?php echo $sname; ?>
                 </td>
-                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 50px;width: 150px">
+                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 100px;width: 150px">
                     <?php echo $peisongday; ?>
                 </td>
-                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 50px;width: 150px">
+                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 100px;width: 150px">
                     <?php echo $shifu; ?>
                 </td>
-                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 50px;width: 150px">
+                <td colspan="6" style="background-color: #CCFFFF;border-radius:2px;height: 100px;width: 150px">
                     <select name="ddzt" id="ddztSelection<?php echo $orderID?>">
                         <option value="未付款" <?php if ($ddzt=="未付款") echo 'selected="selected"'?>>未付款</option>
                         <option value="待发货" <?php if ($ddzt=="待发货") echo 'selected="selected"'?>>待发货</option>
                         <option value="已发货" <?php if ($ddzt=="已发货") echo 'selected="selected"'?>>已发货</option>
                         <option value="已完成" <?php if ($ddzt=="已完成") echo 'selected="selected"'?>>已完成</option>
                     </select>
-                    <!-- TODO -->
-                    <a href="javascript:void(0);" onclick="updateDdzt()">修改</a>
+                    <a href="javascript:void(0);" onclick="updateDdzt(<?php echo $orderID?>)">修改</a>
                 </td>
             </tr>
 
@@ -122,9 +119,6 @@ function parseInt2DDZT($ddzt_i)
         }
     }
     ?>
-    <tr>
-        <td></td>
-    </tr>
     </tbody>
 </table>
 </body>
