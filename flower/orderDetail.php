@@ -6,7 +6,10 @@ require "DAO.php";
 
 $con = DAO::getConnection();
 $orderID = $_GET['orderID'];
-$str = "select * from myorder where orderID = '$orderID'";
+$str = sprintf("SELECT orderID,shifu,inputtime,peisongday,peisongtime,peisong,ddzt,fkfs,liuyan,psyq,mname,member.mobile orderpersonphone,member.address orderpersonaddress,myorder.zip orderpersonzip,sname,customer.address recieveraddress,customer.zip recieverzip FROM myorder,member,customer WHERE myorder.email=member.email AND myorder.custID=customer.custID AND orderID=%d
+UNION
+SELECT orderID,shifu,inputtime,peisongday,peisongtime,peisong,ddzt,fkfs,liuyan,psyq,mname,member.mobile orderpersonphone,member.address orderpersonaddress,myorder.zip orderpersonzip,sname,customer1.address recieveraddress,customer1.zip recieverzip FROM myorder,member,customer1 WHERE myorder.email=member.email AND myorder.custID=customer1.custID AND orderID=%d
+",$orderID,$orderID);
 $result = mysqli_query($con, $str);
 $sum = 0;
 ?>
@@ -22,11 +25,7 @@ $sum = 0;
 <form action="" method="post">
     <table style='width:900px;border-width:0px;border-style:dotted; ' align=center cellspacing="2" cellpadding="3">
         <?php
-        $rs = mysqli_fetch_array($result);
-        $custID = $rs[custID];
-        $str_cust = "select * from customer where custID = '$custID'";
-        $result_cust = mysqli_query($con, $str_cust);
-        $rs_cust = mysqli_fetch_array($result_cust);
+        $rs = mysqli_fetch_assoc($result);
         ?>
         <tr><td style="text-align: center;background-color: lightgrey;border-radius:5px"><b style="font-size: 20px">订单处理信息</b></td></tr>
         <tr><td>订单编号：<div style="color: red"><?php echo $orderID;?></div></td></tr>
@@ -34,16 +33,16 @@ $sum = 0;
 
         <tr><td style="text-align: center;background-color: lightgrey;border-radius:5px"><b style="font-size: 20px">订单基本信息</b></td></tr>
         <tr><td><b style="color: red">订货人信息</b></td></tr>
-        <tr><td>姓名：<?php echo $rs_cust[sname];?></td></tr>
-        <tr><td>手机：<?php echo $rs_cust[mobile];?></td></tr>
-        <tr><td>地址：<?php echo $rs_cust[address];?></td></tr>
-        <tr><td>邮编：<?php echo $rs_cust[zip];?></td></tr>
+        <tr><td>姓名：<?php echo $rs[mname];?></td></tr>
+        <tr><td>手机：<?php echo $rs[orderpersonphone];?></td></tr>
+        <tr><td>地址：<?php echo $rs[orderpersonaddress];?></td></tr>
+        <tr><td>邮编：<?php echo $rs[orderpersonzip];?></td></tr>
 
 
         <tr><td><b style="color: red">收货人信息</b></td></tr>
-        <tr><td>姓名：<?php echo $rs[fpsname];?></td></tr>
-        <tr><td>地址：<?php echo $rs[fpaddress];?></td></tr>
-        <tr><td>邮编：<?php echo $rs[zip];?></td></tr>
+        <tr><td>姓名：<?php echo $rs[sname];?></td></tr>
+        <tr><td>地址：<?php echo $rs[recieveraddress];?></td></tr>
+        <tr><td>邮编：<?php echo $rs[recieverzip];?></td></tr>
 
         <tr><td><b style="color: red">其他信息</b></td></tr>
         <tr><td>配送日期：<?php echo $rs[peisongday];?>&nbsp;&nbsp;时段：<?php echo $rs[peisongtime];?></td></tr>

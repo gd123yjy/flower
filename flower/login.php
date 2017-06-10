@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>please login</title>
+    <title>请登录</title>
 </head>
 <body>
 
@@ -56,15 +56,16 @@ $password = $_POST['password'];
 if ($email==null || $email=='' || $password==null || $password==''){
     //echo "email:" . $email;
     //echo "password:" .$password;
-    echo "<div align='center'>please input email & password</div>";
+    echo "<div align='center'>请输入您的用户名和密码</div>";
 }elseif ($_POST["code"]==null || $_SESSION["check_checks"]!=$_POST["code"]){
-    echo "<div align='center'>please check your code</div>";
+    echo "<div align='center'>验证码不正确</div>";
 }else {
     //check exsit
     $sql = sprintf("SELECT * FROM member WHERE email='%s' and password='%s'",$email,$password);
     $rs = DAO::getResultSet(DAO::getConnection(), $sql);
     if (mysqli_fetch_row($rs)) {
         // store session data
+        session_start();
         $_SESSION['email']=$email;
         $_SESSION['password']=$password;
         header("Location: /flower/showflower.php");

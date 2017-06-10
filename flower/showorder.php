@@ -79,7 +79,7 @@ $con = DAO::getConnection();
                 </td>
 
                 <!-- 实付款 -->
-                <td align="central"><?php echo $sum; ?></td>
+                <td align="center"><?php echo $sum; ?></td>
 
                 <!-- 交易状态-->
                 <td><?php echo $rs1['ddzt'];?></td>

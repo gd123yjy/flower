@@ -261,8 +261,8 @@ if ($_POST['handup']!=null){
     include_once "utilty.php";
 
     $sql = sprintf("insert into myorder(email,custID,shifu,inputtime,peisongday,peisongtime,peisong,psyq,liuyan,shuming,fkfs,fp,fpaddress,zip,fpsname,ddzt) 
-            values('%s',%d,%d,'%s','%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s','s')",
-            $email,$custID,$_SESSION['totalmoney'],$inputtime,$peisongday,$peisongtime,$peisong,$psyq,$liuyan,$shuming,$fkfs,$fp,$fpaddress,$zip,$fpsname,"代付款");
+            values('%s',%d,%d,'%s','%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s')",
+            $email,$custID,$_SESSION['totalmoney'],$inputtime,$peisongday,$peisongtime,$peisong,$psyq,$liuyan,$shuming,$fkfs,$fp,$fpaddress,$zip,$fpsname,"未付款");
     $info &= $con->query($sql);
 
     $str = sprintf("select * from vcart WHERE email='%s'", $email);
