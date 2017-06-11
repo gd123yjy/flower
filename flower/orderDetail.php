@@ -71,7 +71,8 @@ $sum = 0;
                         <tr>
                             <td>
                                 <?php if ($rs_list[pictures]) { ?>
-                                    <img src="<?php echo " 'picture/$rs2[pictures]' " ?>"  style="width: 120px;height: 150px" />
+                                    <img src="<?php echo " picture/$rs_list[pictures] " ?>"  style="width: 120px;height: 150px" />
+                                    <br>
                                 <?php }
                                 echo $rs_list[fname]; ?>
                             </td>

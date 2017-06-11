@@ -3,18 +3,18 @@ use flower;
 CREATE TABLE customer(
 	custID  int  auto_increment,
 	email char(30),
-	sname char(10),
+	sname char(10) not null,
 	sex char(2),
 	mobile char(11),
 	address char(200),
 	zip char(6),
-	cdefault char(2),
+	cdefault char(2) default '0',
        PRIMARY KEY(custID)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 delete from customer;
 
 insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('b@163.com','李筱雯','女','18012889889','佛山市南海区狮山大学城','528225','0');
-insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('b@163.com','方凯西','男','18022735825','佛山市南海区狮山大学城','528225','1');
+insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('b@163.com','方凯西','男','18022735825','佛山市南海区狮山大学城','528225','0');
 insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('a@163.com','陈小花','女','18912123212','佛山市南海区狮山大学城','528225','0');
 insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('a@163.com','王红霞','女','13522132124','广州市新港东路144号','510009','1');
 insert into customer(email,sname,sex,mobile,address,zip,cdefault) values('a@163.com','李梅','女','18921214244','广州市华南师范大学','510023','0');

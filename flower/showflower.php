@@ -42,12 +42,14 @@ for ($i = 0;$i < $rownum;$i ++):
 ?>
     <table style='width:700px;border-width:1px;border-style:dotted;' align=center>
         <tr>
-            <td style='width: 30%'><?php echo "<img style='height:250px;width:200px;' src='picture/".$row['pictures']."'.'_b' />"; ?></td>
+            <td style='width: 30%'>
+                <?php echo sprintf("<a href='flowerDetail.php?flowerID=%d'><img title='点击查看评价' alt='图片加载不出来:(' style='height:300px;width:250px;' src='picture/%s'></a>",$row['flowerID'],$row['pictureb']); ?>
+            </td>
             <td style='width: 70%'>
                 <div style='font-weight:bold;font-size:medium;height:40px;line-height:40px;color:#000066;text-align:center;border-width:1px;  border-style:solid;border-color:red;'> <?=$row['fname']?>
                 </div>
                 <div style='text-align: left;font-size:x-small;color: #000000;'>
-                    <table>
+                    <table cellspacing="3" cellpadding="5">
                         <tr><td style="word-break: keep-all;">材料：</td><td><?php echo $row['cailiao']?></td></tr>
                         <tr><td style="word-break: keep-all;">包装：</td><td><?php echo $row['baozhuang']?></td></tr>
                         <tr><td style="word-break: keep-all;">花语：</td><td><?php echo $row['huayu']?></td></tr>

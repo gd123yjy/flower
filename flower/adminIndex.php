@@ -33,7 +33,7 @@ include_once 'utilty.php';
                 </a> &nbsp;&nbsp;&nbsp;
 
                 <span style="color: White;"> |</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="" style="text-decoration: none;">
+                <a href="adminIndex.php" style="text-decoration: none;">
                     <span style="color: White; font-weight: bold; font-size: medium; font-family: 宋体">后台主页</span>
                 </a>&nbsp; &nbsp; &nbsp;
 

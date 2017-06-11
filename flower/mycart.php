@@ -33,7 +33,7 @@ if ($_SESSION['email'] == null) {
             <tr>
 
                 <td><?php echo $row['flowerID']; ?></td>
-                <td><?php echo "<img src='flowerpicture/" . $row['pictures'] . "' />";
+                <td><?php echo "<img src='picture/" . $row['pictures'] . "' />";
                     echo $row['fname']; ?></td>
                 <td><?php echo $row['price']; ?></td>
                 <td><?php echo $row['yourprice']; ?></td>

@@ -18,7 +18,7 @@ $con = DAO::getConnection();
                 </td>
             </tr>
             <?php
-            $str = "select * from customer";
+            $str = sprintf("select * from customer WHERE email='%s'",$_SESSION['email']);
             $rs = mysqli_query($con, $str);
             $rownum = mysqli_num_rows($rs);
             for ($i = 0;$i < $rownum;$i ++):
@@ -26,7 +26,7 @@ $con = DAO::getConnection();
                 if($row['cdefault'] == 0):
             ?>
             <tr style="font-size: smaller">
-                <td><input type="radio" name="information" value="<?php echo $i;?>"/><?php echo $row['sname']; ?>，<?php echo $row['mobile']; ?>，<?php echo $row['address']; ?>，<?php echo $row['zip']; ?>
+                <td><input type="radio" name="information" value="<?php echo $row['custID'];?>"/><?php echo $row['sname']; ?>，<?php echo $row['mobile']; ?>，<?php echo $row['address']; ?>，<?php echo $row['zip']; ?>
                     <a href="customerUpdate.php?custID=<?php echo $row['custID'];?>">设置为默认地址</a>
                     <a href="customerDelete.php?custID=<?php echo $row['custID'];?>">删除</a>
                 </td>
@@ -34,7 +34,7 @@ $con = DAO::getConnection();
             <?php endif;?>
             <?php if($row['cdefault'] == 1):?>
             <tr style="font-size: smaller">
-                <td><input type="radio" name="information" value="<?php echo $i;?>" checked="checked"/><?php echo $row['sname']; ?>，<?php echo $row['mobile']; ?>，<?php echo $row['address']; ?>，<?php echo $row['zip']; ?>  
+                <td><input type="radio" name="information" value="<?php echo $row['custID'];?>" checked="checked"/><?php echo $row['sname']; ?>，<?php echo $row['mobile']; ?>，<?php echo $row['address']; ?>，<?php echo $row['zip']; ?>
                     <span style="color: red">默认地址</span>
                     <a href="customerDelete.php?custID=<?php echo $row['custID']?>">删除</a>
                 </td>
@@ -199,16 +199,8 @@ $con = DAO::getConnection();
 
 if ($_POST['handup']!=null){
     $email = $_SESSION['email'];
-    $information = $_POST['information'];
-    $str = "select * from customer";
-    $rs = mysqli_query($con, $str);
-    $rownum = mysqli_num_rows($rs);
-    for ($i = 0;$i < $rownum;$i ++){
-        $row = mysqli_fetch_assoc($rs);
-        if ($i == $information){
-            $custID = $row['custID'];
-        }
-    }
+    $custID = $_POST['information'];
+
     $peisong = $_POST['price'];
     if ($peisong == 'a1'){
         $peisong= 0;
@@ -273,8 +265,8 @@ if ($_POST['handup']!=null){
         $flowerID = $row['flowerID'];
         $num = $row['num'];
         //step2 将购买的商品列表添加到shoplist表中
-        $sql = sprintf("insert into shoplist(orderID,flowerID,email,num,title,star,evaluate) 
-            SELECT max(orderID),'%s','%s',%d ,'%s',%d ,'%s' from myorder", $flowerID,$email,$num,"",0,"");
+        $sql = sprintf("insert into shoplist(orderID,flowerID,email,num,title) 
+            SELECT max(orderID),'%s','%s',%d ,'%s',%d ,'%s' from myorder", $flowerID,$email,$num,$row['fname']);
         $info &= $con->query( $sql);
         //step3 修改flower表中的selledNum字段。修改鲜花的销售数量
         $sql = sprintf("update flower set SelledNum=(SELECT SelledNum+%d ) WHERE flowerID='%s'",$num,$flowerID);

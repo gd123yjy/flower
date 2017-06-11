@@ -60,12 +60,8 @@ $con = DAO::getConnection();
         <tr style="border-top:#CC66CC solid 1px;">
             <!-- 宝贝，如果有图片则显示-->
             <td style="width: 300px;height: 100px;">
+                <a href="flowerDetail.php?flowerID=<?php echo $rs2['flowerID']?>"><img src="<?php echo " picture/$rs2[pictures] " ?>"></a>
                 <?php
-
-                if ($rs2['pictures']) {
-                    ?>
-                    <img src="<?php echo " 'picture/$rs2[pictures]' " ?>">
-                <?php }
                 echo $rs2['fname'];
                 ?>
             </td>
